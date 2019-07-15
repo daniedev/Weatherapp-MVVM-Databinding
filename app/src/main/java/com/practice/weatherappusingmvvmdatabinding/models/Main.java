@@ -6,8 +6,10 @@ import java.io.Serializable;
 
 public class Main implements Serializable {
 
+    String degreeSymbol = "°";
+
     @SerializedName("temp")
-    private double temperature;
+    public double temperature;
 
     @SerializedName("pressure")
     private int pressure;
@@ -21,8 +23,8 @@ public class Main implements Serializable {
     @SerializedName("temp_max")
     private double maximumTemperature;
 
-    public double getTemperature() {
-        return temperature;
+    public String getTemperature() {
+        return String.valueOf((int)temperature).concat(degreeSymbol);
     }
 
     public void setTemperature(double temperature) {
@@ -45,16 +47,16 @@ public class Main implements Serializable {
         this.humidity = humidity;
     }
 
-    public double getMinimumTemparature() {
-        return minimumTemparature;
+    public String getMinimumTemparature() {
+        return String.valueOf((int)minimumTemparature).concat(degreeSymbol);
     }
 
     public void setMinimumTemparature(double minimumTemparature) {
         this.minimumTemparature = minimumTemparature;
     }
 
-    public double getMaximumTemperature() {
-        return maximumTemperature;
+    public String getMaximumTemperature() {
+        return String.valueOf((int)maximumTemperature).concat(degreeSymbol);
     }
 
     public void setMaximumTemperature(double maximumTemperature) {

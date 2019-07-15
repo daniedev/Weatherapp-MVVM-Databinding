@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.practice.weatherappusingmvvmdatabinding.R;
 import com.practice.weatherappusingmvvmdatabinding.databinding.ActivityWeatherBinding;
+import com.practice.weatherappusingmvvmdatabinding.databinding.AddCityDialogBinding;
 import com.practice.weatherappusingmvvmdatabinding.viewmodel.WeatherViewModel;
 
 public class WeatherActivity extends AppCompatActivity implements LifecycleOwner {
@@ -18,9 +19,8 @@ public class WeatherActivity extends AppCompatActivity implements LifecycleOwner
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_weather);
         viewModel = new WeatherViewModel();
-        this.getLifecycle().addObserver(viewModel);
-        binding.weatherRecyclerView.setAdapter(viewModel.getAdapter());
         binding.setViewModel(viewModel);
+        this.getLifecycle().addObserver(viewModel);
 
 
     }
