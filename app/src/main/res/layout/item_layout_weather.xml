@@ -5,7 +5,7 @@
     <data>
         <variable
             name="itemViemModel"
-            type="com.practice.weatherappusingmvvmdatabinding.models.WeatherInfo"/>
+            type="com.practice.weatherappusingmvvmdatabinding.viewmodel.WeatherItemViewModel"/>
 
     </data>
 
@@ -33,7 +33,7 @@
                 android:layout_marginBottom="16dp"
                 android:hint="Chennai,IN"
                 android:textSize="30sp"
-                android:text="@{itemViemModel.name}"
+                android:text="@{itemViemModel.cityName}"
                 app:layout_constraintTop_toTopOf="parent"
                 />
             <TextView
@@ -41,8 +41,7 @@
                 android:layout_height= "wrap_content"
                 android:id="@+id/text_view_weather_description"
                 android:hint="Partly Cloudy"
-                android:text="@{itemViemModel.weather.description}"
-
+                android:text="@{itemViemModel.weatherDescription}"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/text_view_city_name"
                 app:layout_constraintTop_toBottomOf="@id/text_view_city_name"
@@ -52,7 +51,7 @@
                 android:id="@+id/image_view_weather_icon"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
-                fetchImage="@{itemViemModel.weather.icon}"
+                fetchImage="@{itemViemModel.imageUrl}"
                 app:layout_constraintHorizontal_weight="2"
                 app:layout_constraintStart_toStartOf="@id/text_view_weather_description"
                 app:layout_constraintTop_toBottomOf="@id/text_view_weather_description"
@@ -74,7 +73,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="8dp"
                 android:hint="41°"
-                android:text="@{itemViemModel.main.temperature}"
+                android:inputType="number"
+                android:text="@{itemViemModel.averageTemperature}"
                 android:gravity="center"
                 android:textSize="80sp"
                 />
@@ -83,7 +83,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:hint="45°"
-                android:text="@{itemViemModel.main.maximumTemperature}"
+                android:inputType="number"
+                android:text="@{itemViemModel.maximumTemperature}"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_weight="0.5"
@@ -98,7 +99,8 @@
                 android:layout_height="0dp"
                 android:id="@+id/text_view_minimum_temperature"
                 android:hint="37°"
-                android:text="@{itemViemModel.main.minimumTemparature}"
+                android:inputType="number"
+                android:text="@{itemViemModel.minimumTemperature}"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/text_view_maximum_temperature"
@@ -107,7 +109,6 @@
                 app:layout_constraintEnd_toEndOf="@id/text_view_maximum_temperature"
                 android:gravity="center_horizontal|top"
                 />
-
 
         </android.support.constraint.ConstraintLayout>
 

@@ -1,4 +1,4 @@
-package com.practice.weatherappusingmvvmdatabinding.viewmodel;
+package com.practice.weatherappusingmvvmdatabinding.adapters;
 
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;

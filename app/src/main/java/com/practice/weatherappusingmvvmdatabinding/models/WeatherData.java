@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Main implements Serializable {
+public class WeatherData implements Serializable {
 
     String degreeSymbol = "°";
 
@@ -23,8 +23,8 @@ public class Main implements Serializable {
     @SerializedName("temp_max")
     private double maximumTemperature;
 
-    public String getTemperature() {
-        return String.valueOf((int)temperature).concat(degreeSymbol);
+    public int getTemperature() {
+        return (int)temperature;
     }
 
     public void setTemperature(double temperature) {
@@ -47,16 +47,17 @@ public class Main implements Serializable {
         this.humidity = humidity;
     }
 
-    public String getMinimumTemparature() {
-        return String.valueOf((int)minimumTemparature).concat(degreeSymbol);
+    public int getMinimumTemparature() {
+        return (int)minimumTemparature;
     }
 
     public void setMinimumTemparature(double minimumTemparature) {
         this.minimumTemparature = minimumTemparature;
     }
 
-    public String getMaximumTemperature() {
-        return String.valueOf((int)maximumTemperature).concat(degreeSymbol);
+
+    public int getMaximumTemperature() {
+        return (int)maximumTemperature;
     }
 
     public void setMaximumTemperature(double maximumTemperature) {

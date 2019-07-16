@@ -14,14 +14,11 @@ public class WeatherInfo implements Serializable {
     @SerializedName("weather")
     private List<Weather> weather;
 
-    private Weather description;
-
-
     @SerializedName("base")
     private String base;
 
     @SerializedName("main")
-    private Main main;
+    private WeatherData weatherData;
 
     @SerializedName("visibility")
     private int visibility;
@@ -76,12 +73,12 @@ public class WeatherInfo implements Serializable {
         this.base = base;
     }
 
-    public Main getMain() {
-        return main;
+    public WeatherData getWeatherData() {
+        return weatherData;
     }
 
-    public void setMain(Main main) {
-        this.main = main;
+    public void setMain(WeatherData main) {
+        this.weatherData = weatherData;
     }
 
     public int getVisibility() {

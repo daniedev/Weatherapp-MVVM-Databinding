@@ -1,13 +1,11 @@
-package com.practice.weatherappusingmvvmdatabinding.view;
+package com.practice.weatherappusingmvvmdatabinding;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.practice.weatherappusingmvvmdatabinding.R;
 import com.practice.weatherappusingmvvmdatabinding.databinding.ActivityWeatherBinding;
-import com.practice.weatherappusingmvvmdatabinding.databinding.AddCityDialogBinding;
 import com.practice.weatherappusingmvvmdatabinding.viewmodel.WeatherViewModel;
 
 public class WeatherActivity extends AppCompatActivity implements LifecycleOwner {
@@ -21,7 +19,5 @@ public class WeatherActivity extends AppCompatActivity implements LifecycleOwner
         viewModel = new WeatherViewModel();
         binding.setViewModel(viewModel);
         this.getLifecycle().addObserver(viewModel);
-
-
     }
 }

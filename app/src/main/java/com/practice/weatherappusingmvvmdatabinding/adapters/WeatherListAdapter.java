@@ -1,4 +1,4 @@
-package com.practice.weatherappusingmvvmdatabinding.view.weatherlistadapter;
+package com.practice.weatherappusingmvvmdatabinding.adapters;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
@@ -9,14 +9,15 @@ import android.view.ViewGroup;
 import com.practice.weatherappusingmvvmdatabinding.models.WeatherInfo;
 import com.practice.weatherappusingmvvmdatabinding.R;
 import com.practice.weatherappusingmvvmdatabinding.databinding.ItemLayoutWeatherBinding;
+import com.practice.weatherappusingmvvmdatabinding.viewmodel.WeatherItemViewModel;
 
 import java.util.List;
 
 public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListViewHolder> {
 
-    List<WeatherInfo> dataToBeRendered;
+    List<WeatherItemViewModel> dataToBeRendered;
     LayoutInflater inflater ;
-    public WeatherListAdapter(List<WeatherInfo> dataToBeRendered){
+    public WeatherListAdapter(List<WeatherItemViewModel> dataToBeRendered){
         this.dataToBeRendered = dataToBeRendered;
     }
 
@@ -30,7 +31,7 @@ public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListViewHold
 
     @Override
     public void onBindViewHolder(@NonNull WeatherListViewHolder weatherListViewHolder, int i) {
-        WeatherInfo weatherInfo = dataToBeRendered.get(i);
+        WeatherItemViewModel weatherInfo = dataToBeRendered.get(i);
         weatherListViewHolder.bind(weatherInfo);
     }
 
@@ -39,8 +40,4 @@ public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListViewHold
         return dataToBeRendered.size();
     }
 
-    public void addItems()
-    {
-
-    }
 }

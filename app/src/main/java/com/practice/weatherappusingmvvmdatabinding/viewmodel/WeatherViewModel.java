@@ -8,8 +8,8 @@ import android.arch.lifecycle.ViewModel;
 import com.practice.weatherappusingmvvmdatabinding.models.WeatherInfo;
 import com.practice.weatherappusingmvvmdatabinding.network.RetrofitInstance;
 import com.practice.weatherappusingmvvmdatabinding.network.WeatherService;
-import com.practice.weatherappusingmvvmdatabinding.sortutils.SortByName;
-import com.practice.weatherappusingmvvmdatabinding.view.weatherlistadapter.WeatherListAdapter;
+import com.practice.weatherappusingmvvmdatabinding.utils.SortByName;
+import com.practice.weatherappusingmvvmdatabinding.adapters.WeatherListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class WeatherViewModel extends ViewModel implements LifecycleObserver {
 
     public WeatherListAdapter adapter;
-    private List<WeatherInfo> weatherInfoList;
+    private List<WeatherItemViewModel> weatherInfoList;
     private WeatherService getData;
     private List<String> citiesToBePreLoaded;
 
@@ -48,12 +48,6 @@ public class WeatherViewModel extends ViewModel implements LifecycleObserver {
         citiesToBePreLoaded.add("kochi");
         citiesToBePreLoaded.add("madurai");
         citiesToBePreLoaded.add("coimbatore");
-        citiesToBePreLoaded.add("ooty");
-        citiesToBePreLoaded.add("salem");
-        citiesToBePreLoaded.add("goa");
-        citiesToBePreLoaded.add("erode");
-        citiesToBePreLoaded.add("tirupati");
-        citiesToBePreLoaded.add("hosur");
     }
 
     private void establishNetworkLayerandPreLoadData() {
@@ -71,7 +65,15 @@ public class WeatherViewModel extends ViewModel implements LifecycleObserver {
                 @Override
                 public void onResponse(Call<WeatherInfo> call, Response<WeatherInfo> response) {
                     if (response.body() != null) {
-                        weatherInfoList.add(response.body());
+                        WeatherInfo dataReceived = response.body();
+                        WeatherItemViewModel weatherItemViewModel = new WeatherItemViewModel();
+                        weatherItemViewModel.setCityName(dataReceived.getName());
+                        weatherItemViewModel.setWeatherDescription(dataReceived.getWeather().getDescription());
+                        weatherItemViewModel.setImageUrl(dataReceived.getWeather().getIcon());
+                        weatherItemViewModel.setAverageTemperature(dataReceived.getWeatherData().getTemperature());
+                        weatherItemViewModel.setMaximumTemperature(dataReceived.getWeatherData().getMaximumTemperature());
+                        weatherItemViewModel.setMinimumTemperature(dataReceived.getWeatherData().getMinimumTemparature());
+                        weatherInfoList.add(weatherItemViewModel);
                     }
 
                     if (citiesToBePreLoaded.size() == weatherInfoList.size()) {

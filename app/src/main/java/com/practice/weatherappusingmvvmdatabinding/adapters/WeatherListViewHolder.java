@@ -1,10 +1,10 @@
-package com.practice.weatherappusingmvvmdatabinding.view.weatherlistadapter;
+package com.practice.weatherappusingmvvmdatabinding.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
-import com.practice.weatherappusingmvvmdatabinding.models.WeatherInfo;
 import com.practice.weatherappusingmvvmdatabinding.databinding.ItemLayoutWeatherBinding;
+import com.practice.weatherappusingmvvmdatabinding.viewmodel.WeatherItemViewModel;
 
 class WeatherListViewHolder extends RecyclerView.ViewHolder {
     ItemLayoutWeatherBinding itemLayoutWeatherBinding;
@@ -12,8 +12,8 @@ class WeatherListViewHolder extends RecyclerView.ViewHolder {
         super(itemLayoutWeatherBinding.getRoot());
         this.itemLayoutWeatherBinding = itemLayoutWeatherBinding;
     }
-    public void bind(WeatherInfo weatherInfo){
-        itemLayoutWeatherBinding.setItemViemModel(weatherInfo);
+    public void bind(WeatherItemViewModel weatherItemViewModel){
+        itemLayoutWeatherBinding.setItemViemModel(weatherItemViewModel);
         itemLayoutWeatherBinding.executePendingBindings();
     }
 }
