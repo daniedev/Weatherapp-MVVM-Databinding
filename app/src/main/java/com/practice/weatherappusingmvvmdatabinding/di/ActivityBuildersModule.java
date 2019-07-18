@@ -10,5 +10,4 @@ public abstract class ActivityBuildersModule {
 
     @ContributesAndroidInjector
     abstract WeatherActivity provideWeatherActivity();
-
 }
