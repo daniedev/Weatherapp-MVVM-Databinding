@@ -33,24 +33,24 @@ public class WeatherItemViewModel  {
         this.imageUrl = imageUrl;
     }
 
-    public int getAverageTemperature() {
-        return  averageTemperature;
+    public String  getAverageTemperature() {
+        return  String.valueOf(averageTemperature);
     }
 
     public void setAverageTemperature(Integer averageTemperature) {
         this.averageTemperature = averageTemperature;
     }
 
-    public int getMinimumTemperature() {
-        return minimumTemperature;
+    public String getMinimumTemperature() {
+        return String.valueOf(minimumTemperature);
     }
 
     public void setMinimumTemperature(Integer minimumTemperature) {
         this.minimumTemperature = minimumTemperature;
     }
 
-    public int getMaximumTemperature() {
-        return maximumTemperature;
+    public String getMaximumTemperature() {
+        return String.valueOf(maximumTemperature);
     }
 
     public void setMaximumTemperature(Integer maximumTemperature) {

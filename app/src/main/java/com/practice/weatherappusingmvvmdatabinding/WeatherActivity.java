@@ -8,15 +8,23 @@ import android.support.v7.app.AppCompatActivity;
 import com.practice.weatherappusingmvvmdatabinding.databinding.ActivityWeatherBinding;
 import com.practice.weatherappusingmvvmdatabinding.viewmodel.WeatherViewModel;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+
 public class WeatherActivity extends AppCompatActivity implements LifecycleOwner {
+
+
     ActivityWeatherBinding binding;
+
+    @Inject
     WeatherViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_weather);
-        viewModel = new WeatherViewModel();
         binding.setViewModel(viewModel);
         this.getLifecycle().addObserver(viewModel);
     }

@@ -5,19 +5,16 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModel;
 
-import com.practice.weatherappusingmvvmdatabinding.models.WeatherInfo;
-import com.practice.weatherappusingmvvmdatabinding.network.RetrofitInstance;
-import com.practice.weatherappusingmvvmdatabinding.network.WeatherService;
-import com.practice.weatherappusingmvvmdatabinding.utils.SortByName;
 import com.practice.weatherappusingmvvmdatabinding.adapters.WeatherListAdapter;
+import com.practice.weatherappusingmvvmdatabinding.models.WeatherInfo;
+import com.practice.weatherappusingmvvmdatabinding.network.WeatherService;
+import com.practice.weatherappusingmvvmdatabinding.network.WeatherServiceManager;
+import com.practice.weatherappusingmvvmdatabinding.utils.RetrofitUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import javax.inject.Inject;
 
 public class WeatherViewModel extends ViewModel implements LifecycleObserver {
 
@@ -26,12 +23,20 @@ public class WeatherViewModel extends ViewModel implements LifecycleObserver {
     private WeatherService getData;
     private List<String> citiesToBePreLoaded;
 
+    WeatherServiceManager weatherServiceManager;
+
+    @Inject
+    public WeatherViewModel(WeatherServiceManager weatherServiceManager) {
+        this.weatherServiceManager = weatherServiceManager;
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onCreate() {
         setAdapter();
         generateListOfCitiesToBePreLoaded();
-        establishNetworkLayerandPreLoadData();
+        if (citiesToBePreLoaded != null) {
+            fetchDataFromServer(citiesToBePreLoaded);
+        }
     }
 
     private void setAdapter() {
@@ -50,44 +55,31 @@ public class WeatherViewModel extends ViewModel implements LifecycleObserver {
         citiesToBePreLoaded.add("coimbatore");
     }
 
-    private void establishNetworkLayerandPreLoadData() {
-        getData = new RetrofitInstance().getRetrofitInstance().create(WeatherService.class);
-        if (citiesToBePreLoaded != null) {
-            fetchDataFromServer(citiesToBePreLoaded);
-        }
-
-    }
-
     private void fetchDataFromServer(final List<String> listOfCities) {
         for (String cityName : listOfCities) {
-            Call<WeatherInfo> networkCall = getData.getWeatherInfo(cityName, "metric");
-            networkCall.enqueue(new Callback<WeatherInfo>() {
-                @Override
-                public void onResponse(Call<WeatherInfo> call, Response<WeatherInfo> response) {
-                    if (response.body() != null) {
-                        WeatherInfo dataReceived = response.body();
-                        WeatherItemViewModel weatherItemViewModel = new WeatherItemViewModel();
-                        weatherItemViewModel.setCityName(dataReceived.getName());
-                        weatherItemViewModel.setWeatherDescription(dataReceived.getWeather().getDescription());
-                        weatherItemViewModel.setImageUrl(dataReceived.getWeather().getIcon());
-                        weatherItemViewModel.setAverageTemperature(dataReceived.getWeatherData().getTemperature());
-                        weatherItemViewModel.setMaximumTemperature(dataReceived.getWeatherData().getMaximumTemperature());
-                        weatherItemViewModel.setMinimumTemperature(dataReceived.getWeatherData().getMinimumTemparature());
-                        weatherInfoList.add(weatherItemViewModel);
-                    }
 
-                    if (citiesToBePreLoaded.size() == weatherInfoList.size()) {
-                        Collections.sort(weatherInfoList, new SortByName());
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<WeatherInfo> call, Throwable t) {
-                }
-            });
+            weatherServiceManager.getWeatherInfo(cityName, "metric").subscribe(this::populateView, this::showErrorMessage);
 
         }
     }
 
+
+
+    public void populateView(WeatherInfo weatherInfo) {
+        if (weatherInfo != null) {
+            WeatherItemViewModel weatherItemViewModel = new WeatherItemViewModel();
+            weatherItemViewModel.setCityName(weatherInfo.getName());
+            weatherItemViewModel.setWeatherDescription(weatherInfo.getWeather().getDescription());
+            weatherItemViewModel.setImageUrl(weatherInfo.getWeather().getIcon());
+            weatherItemViewModel.setAverageTemperature(weatherInfo.getWeatherData().getTemperature());
+            weatherItemViewModel.setMaximumTemperature(weatherInfo.getWeatherData().getMaximumTemperature());
+            weatherItemViewModel.setMinimumTemperature(weatherInfo.getWeatherData().getMinimumTemparature());
+            weatherInfoList.add(weatherItemViewModel);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void showErrorMessage(Throwable throwable) {
+        System.out.println(throwable.getLocalizedMessage());
+    }
 }
