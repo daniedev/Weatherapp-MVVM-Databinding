@@ -3,24 +3,21 @@ package com.practice.weatherappusingmvvmdatabinding.viewmodel;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
-import android.arch.lifecycle.ViewModel;
 
 import com.practice.weatherappusingmvvmdatabinding.adapters.WeatherListAdapter;
 import com.practice.weatherappusingmvvmdatabinding.models.WeatherInfo;
 import com.practice.weatherappusingmvvmdatabinding.network.WeatherService;
 import com.practice.weatherappusingmvvmdatabinding.network.WeatherServiceManager;
-import com.practice.weatherappusingmvvmdatabinding.utils.RetrofitUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class WeatherViewModel extends ViewModel implements LifecycleObserver {
+public class WeatherViewModel implements LifecycleObserver {
 
     public WeatherListAdapter adapter;
     private List<WeatherItemViewModel> weatherInfoList;
-    private WeatherService getData;
     private List<String> citiesToBePreLoaded;
 
     WeatherServiceManager weatherServiceManager;
@@ -62,7 +59,6 @@ public class WeatherViewModel extends ViewModel implements LifecycleObserver {
 
         }
     }
-
 
 
     public void populateView(WeatherInfo weatherInfo) {

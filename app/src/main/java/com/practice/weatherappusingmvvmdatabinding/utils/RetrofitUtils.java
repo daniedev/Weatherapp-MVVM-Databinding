@@ -11,24 +11,22 @@ public class RetrofitUtils {
     public static final String BASE_URL = "https://community-open-weather-map.p.rapidapi.com";
     private static Retrofit retrofit = null;
 
-    public Retrofit getRetrofitInstance(){
+    public Retrofit getRetrofitInstance() {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .client(client)
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(client)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         return retrofit;
     }
-
-
 
 
 }

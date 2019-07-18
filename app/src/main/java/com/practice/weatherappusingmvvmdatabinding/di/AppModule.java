@@ -19,10 +19,9 @@ public class AppModule {
     }
 
     @Provides
-    static WeatherService provideWeatherService(Retrofit retrofit){
+    static WeatherService provideWeatherService(Retrofit retrofit) {
         return retrofit.create(WeatherService.class);
     }
-
 
 
 }

@@ -8,10 +8,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
 @Component(
-        modules = {AndroidSupportInjectionModule.class,ActivityBuildersModule.class,AppModule.class}
+        modules = {AndroidSupportInjectionModule.class, ActivityBuildersModule.class, AppModule.class}
 )
 public interface AppComponent extends AndroidInjector<WeatherApplication> {
-
 
 
 }

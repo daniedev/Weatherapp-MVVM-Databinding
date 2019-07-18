@@ -1,6 +1,6 @@
 package com.practice.weatherappusingmvvmdatabinding.viewmodel;
 
-public class WeatherItemViewModel  {
+public class WeatherItemViewModel {
 
     private String cityName;
     private String weatherDescription;
@@ -33,8 +33,8 @@ public class WeatherItemViewModel  {
         this.imageUrl = imageUrl;
     }
 
-    public String  getAverageTemperature() {
-        return  String.valueOf(averageTemperature);
+    public String getAverageTemperature() {
+        return String.valueOf(averageTemperature);
     }
 
     public void setAverageTemperature(Integer averageTemperature) {
