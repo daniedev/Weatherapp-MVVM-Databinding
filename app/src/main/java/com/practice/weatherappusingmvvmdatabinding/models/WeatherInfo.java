@@ -7,6 +7,7 @@ import java.util.List;
 
 public class WeatherInfo implements Serializable {
 
+
     @SerializedName("coord")
     private Coordinates coordinates;
 
@@ -17,7 +18,7 @@ public class WeatherInfo implements Serializable {
     private String base;
 
     @SerializedName("main")
-    private Main main;
+    private WeatherData weatherData;
 
     @SerializedName("visibility")
     private int visibility;
@@ -54,9 +55,11 @@ public class WeatherInfo implements Serializable {
         this.coordinates = coordinates;
     }
 
-    public List<Weather> getWeather() {
-        return weather;
+    public Weather getWeather() {
+        return weather.get(0);
     }
+
+    public  Weather getdescription() { return weather.get(0);}
 
     public void setWeather(List<Weather> weather) {
         this.weather = weather;
@@ -70,12 +73,12 @@ public class WeatherInfo implements Serializable {
         this.base = base;
     }
 
-    public Main getMain() {
-        return main;
+    public WeatherData getWeatherData() {
+        return weatherData;
     }
 
-    public void setMain(Main main) {
-        this.main = main;
+    public void setMain(WeatherData main) {
+        this.weatherData = weatherData;
     }
 
     public int getVisibility() {
@@ -149,4 +152,5 @@ public class WeatherInfo implements Serializable {
     public void setCod(int cod) {
         this.cod = cod;
     }
+
 }

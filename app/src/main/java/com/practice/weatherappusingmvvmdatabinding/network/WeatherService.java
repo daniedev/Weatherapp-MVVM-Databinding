@@ -1,7 +1,8 @@
 package com.practice.weatherappusingmvvmdatabinding.network;
+
 import com.practice.weatherappusingmvvmdatabinding.models.WeatherInfo;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
@@ -13,6 +14,6 @@ public interface WeatherService {
     })
 
     @GET("/weather")
-    Call<WeatherInfo> getWeatherInfo(@Query("q") String place, @Query("units") String unit);
+    Observable<WeatherInfo> getWeatherInfo(@Query("q") String place, @Query("units") String unit);
 
 }
